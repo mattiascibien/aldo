@@ -87,6 +87,10 @@ namespace Aldo
                         _logger.Log(LogLevel.Error, twe, "Exception in worker");
                     }
                 }
+                catch (Exception e)
+                {
+                    _logger.Log(LogLevel.Critical, e, "Exception in worker");
+                }
             }
             _logger.LogInformation("Bot has stopped");
         }
