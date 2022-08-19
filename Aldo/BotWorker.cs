@@ -55,8 +55,9 @@ namespace Aldo
         private async Task RetweetMentions()
         {
             var mentionsTimeline = await _twitterClient.Timelines.GetMentionsTimelineAsync();
+            var mentions = mentionsTimeline.Take(_config.TweetLimit);
 
-            foreach (var mention in mentionsTimeline)
+            foreach (var mention in mentions)
             {
                 await TryRetweetAsync(mention);
             }
