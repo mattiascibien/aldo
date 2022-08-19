@@ -11,5 +11,9 @@ namespace Aldo.Config
         public TimeSpan SleepTime { get; set; }
 
         public TimeSpan RateLimitSleepTime { get; set; }
+
+        public string SearchQuery { get; set; } = string.Empty;
+
+        public int TweetLimit { get; set; }
     }
 }
