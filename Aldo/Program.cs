@@ -1,5 +1,4 @@
 using Aldo.Config;
-using dotenv.net;
 using Tweetinvi;
 
 namespace Aldo
@@ -9,7 +8,7 @@ namespace Aldo
         public static void Main(string[] args)
         {
 #if DEBUG
-            DotEnv.Load();
+            dotenv.net.DotEnv.Load();
 #endif
 
             IHost host = Host.CreateDefaultBuilder(args)
