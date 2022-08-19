@@ -5,9 +5,9 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Aldo/Aldo.csproj", "Aldo/"]
+COPY ["Aldo.csproj", "Aldo/"]
 RUN dotnet restore "Aldo/Aldo.csproj"
-COPY . .
+COPY [".", "Aldo/"]
 WORKDIR "/src/Aldo"
 RUN dotnet build "Aldo.csproj" -c Release -o /app/build
 
