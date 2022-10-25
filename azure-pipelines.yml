@@ -32,5 +32,5 @@ stages:
       inputs:
         containerRegistry: 'DockerHub'
         command: 'login'
-    - bash: docker buildx build --no-cache --push --platform linux/arm64,linux/amd64 --tag $(tag)  $(Build.SourcesDirectory)/Aldo/ 
+    - bash: docker buildx build --no-cache --push --platform linux/arm64 --tag $(tag)  $(Build.SourcesDirectory)/Aldo/ 
     
