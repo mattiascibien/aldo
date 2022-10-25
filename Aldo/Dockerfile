@@ -17,4 +17,4 @@ RUN dotnet publish "Aldo.csproj" -c Release -o /app/publish /p:UseAppHost=false
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Aldo.dll"]
+CMD ["dotnet", "Aldo.dll"]

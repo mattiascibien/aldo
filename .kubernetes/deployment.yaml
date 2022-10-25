@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 3drenderbot-deployment
+  labels:
+    app: 3drenderbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 3drenderbot
+  template:
+    metadata:
+      labels:
+        app: 3drenderbot
+    spec:
+      containers:
+        - name: 3drenderbot
+          image: mattiascibien/aldo:701
+          env:
+            - name: ALDO_TWITTERCLIENT__ACCESSSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: aldo.environment
+                  key: ALDO_TWITTERCLIENT__ACCESSSECRET
+            - name: ALDO_TWITTERCLIENT__ACCESSTOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: aldo.environment
+                  key: ALDO_TWITTERCLIENT__ACCESSTOKEN
+            - name: ALDO_TWITTERCLIENT__CONSUMERKEY
+              valueFrom:
+                secretKeyRef:
+                  name: aldo.environment
+                  key: ALDO_TWITTERCLIENT__CONSUMERKEY
+            - name: ALDO_TWITTERCLIENT__CONSUMERSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: aldo.environment
+                  key: ALDO_TWITTERCLIENT__CONSUMERSECRET
+      imagePullSecrets:
+        - name: private-dockerhub
