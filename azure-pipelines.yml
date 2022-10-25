@@ -32,7 +32,7 @@ stages:
     #   inputs:
     #     containerRegistry: 'DockerHub'
     #     command: 'login'
-    - bash: docker buildx build --no-cache --push --platform linux/arm64 -f Dockerfile.arm64 --tag mattiascibien/aldo:$(tag)  $(Build.SourcesDirectory)/Aldo/ 
+    - bash: cd $(Build.SourcesDirectory)/Aldo/ && docker buildx build --no-cache --push --platform linux/arm64 -f Dockerfile.arm64 --tag mattiascibien/aldo:$(tag) .
     # - task: Docker@2
     #   displayName: Build an image
     #   inputs:
