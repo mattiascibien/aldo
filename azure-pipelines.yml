@@ -1,5 +1,3 @@
-30 lines (26 sloc)  577 Bytes
-
 # Docker
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
