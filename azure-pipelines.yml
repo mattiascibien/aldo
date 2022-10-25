@@ -20,17 +20,25 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     containerRegistry: 'DockerHub'
-    #     repository: 'mattiascibien/aldo'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Dockerfile'
-    #     tags: '$(tag)'
     - task: Docker@2
+      displayName: Build an image
       inputs:
         containerRegistry: 'DockerHub'
-        command: 'login'
-    - bash: docker buildx build --no-cache --push --platform linux/arm64 --tag $(tag)  $(Build.SourcesDirectory)/Aldo/ 
+        repository: 'mattiascibien/aldo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile.amd64'
+        tags: '$(tag)'
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'DockerHub'
+    #     command: 'login'
+    # - bash: docker buildx build --no-cache --push --platform linux/arm64 --tag $(tag)  $(Build.SourcesDirectory)/Aldo/ 
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'mattiascibien/aldo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile.arm64'
+        tags: '$(tag)'
     
