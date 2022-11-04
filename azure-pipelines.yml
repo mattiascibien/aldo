@@ -13,33 +13,19 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build image
+  displayName: Build Docker Image
   jobs:
   - job: Build
     displayName: Build
     pool:
       vmImage: ubuntu-latest
     steps:
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     containerRegistry: 'DockerHub'
-    #     repository: 'mattiascibien/aldo'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Dockerfile.amd64'
-    #     tags: '$(tag)'
     - task: Docker@2
+      displayName: 'Login To DockerHub'
       inputs:
         containerRegistry: 'DockerHub'
         command: 'login'
     - bash: docker buildx create --bootstrap --driver docker-container --use --platform linux/amd64,linux/arm64
+      displayName: 'Create multi-arch Docker Builder'
     - bash: cd $(Build.SourcesDirectory)/Aldo/ && docker buildx build --no-cache --push --platform linux/amd64,linux/arm64 -f Dockerfile.amd64 --tag mattiascibien/aldo:$(tag) .
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     containerRegistry: 'DockerHub'
-    #     repository: 'mattiascibien/aldo'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Dockerfile.arm64'
-    #     tags: '$(tag)'
-    
+      displayName: 'Build and push Image'
