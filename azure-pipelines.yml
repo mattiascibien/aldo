@@ -28,12 +28,12 @@ stages:
     #     command: 'buildAndPush'
     #     Dockerfile: '**/Dockerfile.amd64'
     #     tags: '$(tag)'
-    # - task: Docker@2
-    #   inputs:
-    #     containerRegistry: 'DockerHub'
-    #     command: 'login'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        command: 'login'
     - bash: docker buildx create --bootstrap --driver docker-container --use --platform linux/amd64,linux/arm64
-    - bash: cd $(Build.SourcesDirectory)/Aldo/ && docker buildx build --no-cache --push --platform inux/arm64 -f Dockerfile.arm64 --tag mattiascibien/aldo:$(tag) .
+    - bash: cd $(Build.SourcesDirectory)/Aldo/ && docker buildx build --no-cache --push --platform linux/amd64,linux/arm64 -f Dockerfile.amd64 --tag mattiascibien/aldo:$(tag) .
     # - task: Docker@2
     #   displayName: Build an image
     #   inputs:
